@@ -296,22 +296,22 @@ function runQNoBtn(){ const nb=document.getElementById('qNoBtn'),card=nb.closest
 
 // ALBUM SLIDES (add your actual image paths here)
 const SLIDES = [
-  { src: "", caption: "Our first memory together 💕" }, 
-  { src: "", caption: "Smiles like sunshine 🌸" }, 
-  { src: "", caption: "Laughing nonstop ✨" }, 
-  { src: "", caption: "Treasured moments 💖" }, 
-  { src: "", caption: "Sweetest bond 🎀" }, 
-  { src: "", caption: "You and me 💗" }, 
-  { src: "", caption: "Endless joy 🌺" }, 
-  { src: "", caption: "Sparkle in your eyes ⭐" }, 
-  { src: "", caption: "Anna's pride 🥰" }, 
-  { src: "", caption: "Always together 🌟" }, 
-  { src: "", caption: "Little sister magic 💫" }, 
-  { src: "", caption: "Unforgettable days 🎊" }, 
-  { src: "", caption: "Heart full of love 💝" }, 
-  { src: "", caption: "Butterfly hugs 🦋" }, 
-  { src: "", caption: "Rainbow of memories 🌈" },
-  { src: "", caption: "Our favourite photo ever... 🥹💕" }
+  { src: "image1.jpeg", caption: "Our first memory together 💕" }, 
+  { src: "image2.jpeg", caption: "Smiles like sunshine 🌸" }, 
+  { src: "image3.jpeg", caption: "Laughing nonstop ✨" }, 
+  { src: "image4.jpeg", caption: "Treasured moments 💖" }, 
+  { src: "image5.jpeg", caption: "Sweetest bond 🎀" }, 
+  { src: "image6.jpeg", caption: "You and me 💗" }, 
+  { src: "image7.jpeg", caption: "Endless joy 🌺" }, 
+  { src: "image8.jpeg", caption: "Sparkle in your eyes ⭐" }, 
+  { src: "image9.jpeg", caption: "Anna's pride 🥰" }, 
+  { src: "image10.jpeg", caption: "Always together 🌟" }, 
+  { src: "image11.jpeg", caption: "Little sister magic 💫" }, 
+  { src: "image12.jpeg", caption: "Unforgettable days 🎊" }, 
+  { src: "image13.jpeg", caption: "Heart full of love 💝" }, 
+  { src: "image14.jpeg", caption: "Butterfly hugs 🦋" }, 
+  { src: "image15.jpeg", caption: "Rainbow of memories 🌈" },
+  { src: "image16.jpeg", caption: "Our favourite photo ever... 🥹💕" }
 ];
 let currentSlide=0, bdayPopupShown=false;
 function buildAlbum(){ const container=document.getElementById('slidesContainer'), dotsEl=document.getElementById('slideDots'); container.innerHTML=''; dotsEl.innerHTML=''; SLIDES.forEach((sl,idx)=>{ const div=document.createElement('div'); div.className='album-slide'+(idx===SLIDES.length-1?' surprise-slide':''); div.id='slide-'+idx; const imgWrap=document.createElement('div'); imgWrap.className='slide-img-wrap'; if(sl.src){ const img=document.createElement('img'); img.src=sl.src; img.alt='Memory'; img.draggable=false; img.onerror=()=>{ imgWrap.innerHTML=`<div class="slide-placeholder"><span>📷</span><span>Photo ${idx+1}</span><small style="opacity:.5">Add src</small></div>`; }; imgWrap.appendChild(img); } else { imgWrap.innerHTML=`<div class="slide-placeholder"><span>📷</span><span>Photo ${idx+1}</span><small style="opacity:.5">Add image URL</small></div>`; } const capBar=document.createElement('div'); capBar.className='slide-caption-bar'; capBar.innerHTML=`<div class="slide-caption">${sl.caption}</div><div class="slide-counter">${idx===SLIDES.length-1?'🎁 The End!':(idx+1)+' / '+(SLIDES.length-1)}</div>`; const nav=document.createElement('div'); nav.className='slide-nav'; if(idx!==SLIDES.length-1){ nav.innerHTML=`<button class="slide-btn slide-btn-back" onclick="slideNav(-1)">← Back</button><button class="slide-btn slide-btn-next" onclick="slideNav(1)">Next →</button>`; }else{ nav.innerHTML=`<button class="slide-btn slide-btn-back" onclick="slideNav(-1)">← Back</button><button class="slide-btn slide-btn-next" onclick="endExperience()">🎉 Finish! 🎉</button>`; } div.appendChild(imgWrap); div.appendChild(capBar); div.appendChild(nav); container.appendChild(div); const dot=document.createElement('div'); dot.className='sdot'; dot.id='sdot-'+idx; dotsEl.appendChild(dot); }); }
