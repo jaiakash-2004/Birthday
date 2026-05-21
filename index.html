@@ -227,24 +227,24 @@ html,body{
 
 <!-- PAGE 2: READY -->
 <div class="page" id="page-ready">
-  <div class="card"><span class="big-emoji">🤔</span><h2>I have some questions...</h2><p>Are you ready to answer them honestly? 👀<br>No running away, okay?</p><div class="btn-row"><button class="btn-primary" onclick="goToQuestions()">Yes! 🙋‍♀️</button><button class="btn-secondary" onmouseenter="runNoBtn(this)" ontouchstart="runNoBtn(this)">No 🙈</button></div></div>
+  <div class="card"><span class="big-emoji">🤔</span><h2>I have some questions...</h2><p>Are you ready to answer them honestly? 👀<br>Oda kudadhu,okay?</p><div class="btn-row"><button class="btn-primary" onclick="goToQuestions()">Yes! 🙋‍♀️</button><button class="btn-secondary" onmouseenter="runNoBtn(this)" ontouchstart="runNoBtn(this)">No 🙈</button></div></div>
 </div>
 
 <!-- PAGE 3: QUESTIONS -->
 <div class="page" id="page-questions">
-  <div class="card q-card"><div class="q-progress"><div class="q-dot active" id="dot-0"></div><div class="q-dot" id="dot-1"></div><div class="q-dot" id="dot-2"></div></div><span class="big-emoji" id="qEmoji">🥺</span><div class="q-text" id="qText">Do you like your anna?</div><div class="q-btn-row"><button class="btn-primary" onclick="nextQuestion()">Yes! 💕</button><button class="q-no-btn" id="qNoBtn" onmouseenter="runQNoBtn()" ontouchstart="runQNoBtn()">No 😤</button></div></div>
+  <div class="card q-card"><div class="q-progress"><div class="q-dot active" id="dot-0"></div><div class="q-dot" id="dot-1"></div><div class="q-dot" id="dot-2"></div></div><span class="big-emoji" id="qEmoji">🥺</span><div class="q-text" id="qText">Do you like your anna?</div><div class="q-btn-row"><button class="btn-primary" onclick="nextQuestion()">Yes! 💕</button><button class="q-no-btn" id="qNoBtn" onmouseenter="runQNoBtn()" ontouchstart="runQNoBtn()">Therla 😤</button></div></div>
 </div>
 
 <!-- PAGE 4: BRIDGE -->
-<div class="page" id="page-bridge"><div class="card"><span class="big-emoji">😏</span><h2>Ok ok, enough...<br>I got my answers! 😄</h2><p>Now click here to see anna's wish to her kutty ma 💌</p><button class="btn-gold" onclick="goToMessage()">🌸 See Anna's Wish 🌸</button></div></div>
+<div class="page" id="page-bridge"><div class="card"><span class="big-emoji">😏</span><h2>seri seri! podhum...<br>Answer lam kedachitu!! 😄</h2><p>Now click here to see anna's wish to her kutty ma 💌</p><button class="btn-gold" onclick="goToMessage()">🌸 See Anna's Wish 🌸</button></div></div>
 
 <!-- PAGE 5: MESSAGE -->
 <div class="page scrollable" id="page-message">
-  <div class="message-wrapper"><div class="letter-paper"><div class="letter-header"><div class="anna-label">💌 A letter from Anna</div><h2>To my dearest<br><em>Kutty Ma</em> 🌸</h2></div><div class="letter-body">Hey kutty ma,<br><br>Happy Birthday, my little sunshine! 🌞 Every memory with you is a treasure I hold close to my heart. You make my world brighter just by being in it. I hope this year brings you endless smiles, sweet surprises, and all the love you deserve. Never forget how special you are to me. 💕<br><br>Anna loves you to the moon and back. 🌙<br><br>Happy Birthday, my dearest kutty ma! 🎂✨</div><div class="huggy-section"><p>💝 And to finish this off properly...<br>Anna needs a huggy from her kutty ma!</p><button class="huggy-btn" onclick="goToHug()">🤗 Give Huggy!</button></div></div></div>
+  <div class="message-wrapper"><div class="letter-paper"><div class="letter-header"><div class="anna-label">💌 A letter from Anna</div><h2>To my dearest<br><em>Kutty Ma</em> 🌸</h2></div><div class="letter-body">Hey kutty ma,<br><br>Happy Birthday, En kutty papa ku! Namba evlo sanda potaalum, kova pattalum , unaku naanum enaku neeyum nu dha irukom lah!! Nee ilana enala thaangikave mudila adhe moment nee irundha romba happy ah irukan! Ena vitu ponum nu matum yosikadha ! Poga maatan naan lam puridha? Un kudave irundhu una torture pani paathupan! Sorry ma, una naa kashta paduthirundha , hurt panirundha elathukum sorry!!! 💕<br><br>Anna ku una Avlo pudikum , nee anna nu koopduradhum avlo pudikum!!🌙<br><br>Happy Birthday, my dearest kutty ma! 🎂✨</div><div class="huggy-section"><p>💝 And to finish this off properly...<br>Anna needs a huggy from her kutty ma!</p><button class="huggy-btn" onclick="goToHug()">🤗 Give Huggy!</button></div></div></div>
 </div>
 
 <!-- PAGE 6: HUG -->
-<div class="page" id="page-hug"><div class="hug-scene"><h2>Yaaaay! 🎉</h2><p>Huggy received! 💌</p><div class="hug-figures"><span class="hug-left">🧑</span><span class="hug-hearts">💕</span><span class="hug-right">👧</span></div><p class="hug-sub">Anna loves you SO much! 🥰</p><button class="hug-continue-btn" onclick="goToVideo()">✨ A Video From Anna ✨</button></div></div>
+<div class="page" id="page-hug"><div class="hug-scene"><h2>Eeeee!! 🎉</h2><p>Huggy received! 💌</p><div class="hug-figures"><span class="hug-left">🧑</span><span class="hug-hearts">💕</span><span class="hug-right">👧</span></div><p class="hug-sub">Anna loves you SO much! 🥰</p><button class="hug-continue-btn" onclick="goToVideo()">✨ A Video From Anna ✨</button></div></div>
 
 <!-- PAGE 7: VIDEO -->
 <div class="page scrollable" id="page-video">
@@ -296,21 +296,21 @@ function runQNoBtn(){ const nb=document.getElementById('qNoBtn'),card=nb.closest
 
 // ALBUM SLIDES (add your actual image paths here)
 const SLIDES = [
-  { src: "image1.jpeg", caption: "Our first memory together 💕" }, 
-  { src: "image2.jpeg", caption: "Smiles like sunshine 🌸" }, 
-  { src: "image3.jpeg", caption: "Laughing nonstop ✨" }, 
-  { src: "image4.jpeg", caption: "Treasured moments 💖" }, 
-  { src: "image5.jpeg", caption: "Sweetest bond 🎀" }, 
-  { src: "image6.jpeg", caption: "You and me 💗" }, 
-  { src: "image7.jpeg", caption: "Endless joy 🌺" }, 
-  { src: "image8.jpeg", caption: "Sparkle in your eyes ⭐" }, 
-  { src: "image9.jpeg", caption: "Anna's pride 🥰" }, 
-  { src: "image10.jpeg", caption: "Always together 🌟" }, 
-  { src: "image11.jpeg", caption: "Little sister magic 💫" }, 
-  { src: "image12.jpeg", caption: "Unforgettable days 🎊" }, 
-  { src: "image13.jpeg", caption: "Heart full of love 💝" }, 
-  { src: "image14.jpeg", caption: "Butterfly hugs 🦋" }, 
-  { src: "image15.jpeg", caption: "Rainbow of memories 🌈" },
+  { src: "image1.jpeg", caption: "My kutty deetcha's favourite picture enaku!! 💕" }, 
+  { src: "image2.jpeg", caption: "Innah azhagu dii chinna pullailayum!!! 🌸" }, 
+  { src: "image3.jpeg", caption: "Motta boss ah irundhalum cute lah!!✨" }, 
+  { src: "image4.jpeg", caption: "Vaalu , enga erudhu paaru! 💖" }, 
+  { src: "image5.jpeg", caption: " Happy ah iruka lahh!!! 🎀" }, 
+  { src: "image6.jpeg", caption: "There comes anna's entry !💗" }, 
+  { src: "image7.jpeg", caption: "Evlo gap uh paaren ( close aagitu iruka phase) 🌺" }, 
+  { src: "image8.jpeg", caption: "Ipo close aagitom lah (see the smile in my face) ⭐" }, 
+  { src: "image9.jpeg", caption: "Photo edutha moonja moodipiya di! 🥰" }, 
+  { src: "image10.jpeg", caption: "Our last pic in that parking 🌟" }, 
+  { src: "image11.jpeg", caption: "Main campus layu koothu adichirukom lahh!!💫" }, 
+  { src: "image12.jpeg", caption: "Chennai vandhona oor suthunadhu first tym! 🎊" }, 
+  { src: "image13.jpeg", caption: "WITH LOVE padathuku lam poyirukom paaren! 💝" }, 
+  { src: "image14.jpeg", caption: "Adam pudichi tattooo pota la nee ! thirudii 🦋" }, 
+  { src: "image15.jpeg", caption: "Epd beach pora aasaya neravethunomaa!! 🌈" },
   { src: "image16.jpeg", caption: "Our favourite photo ever... 🥹💕" }
 ];
 let currentSlide=0, bdayPopupShown=false;
