@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Happy Birthday Kutty Ma 🎀</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Caveat:wght@400;600;700&family=Quicksand:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --rose:#f43f5e;--pink:#fb7185;--blush:#fda4af;
+  --cream:#fff1f2;--gold:#f59e0b;--lilac:#e879f9;--mint:#34d399;
+}
+html,body{
+  font-family:'Quicksand',sans-serif;background:#fff0f3;
+  overflow:hidden;height:100%;width:100%;
+  -webkit-tap-highlight-color:transparent;touch-action:manipulation;
+}
+
+/* ── CONFETTI ── */
+.confetti-container{position:fixed;inset:0;pointer-events:none;z-index:9999}
+.confetti-piece{position:absolute;border-radius:2px;animation:confettiFall linear forwards;opacity:0}
+@keyframes confettiFall{0%{transform:translateY(-20px) rotate(0deg);opacity:1}100%{transform:translateY(110vh) rotate(720deg);opacity:0}}
+
+/* ── PAGES ── */
+.page{
+  position:fixed;inset:0;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  opacity:0;pointer-events:none;transition:opacity .6s ease;
+  padding:clamp(12px,4vw,24px);
+}
+.page.active{opacity:1;pointer-events:all}
+.page.scrollable{
+  overflow-y:auto;overflow-x:hidden;
+  justify-content:flex-start;align-items:flex-start;
+  padding:clamp(24px,5vw,40px) clamp(12px,4vw,20px) 80px;
+  -webkit-overflow-scrolling:touch;
+}
+
+/* floating hearts */
+.hearts-bg{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden}
+.heart-float{position:absolute;animation:floatHeart linear infinite;opacity:.15}
+@keyframes floatHeart{0%{transform:translateY(110vh) rotate(-10deg)}100%{transform:translateY(-20vh) rotate(10deg)}}
+
+/* flash */
+.transition-overlay{
+  position:fixed;inset:0;
+  background:radial-gradient(circle,rgba(244,63,94,.4),rgba(232,121,249,.4));
+  z-index:1000;pointer-events:none;opacity:0;transition:opacity .3s
+}
+.transition-overlay.flash{opacity:1}
+
+/* ── SHARED CARD ── */
+.card{
+  background:white;border-radius:24px;
+  padding:clamp(22px,5vw,48px) clamp(18px,5vw,56px);
+  text-align:center;
+  box-shadow:0 16px 48px rgba(244,63,94,.15),0 4px 16px rgba(0,0,0,.06);
+  width:100%;position:relative;z-index:2;
+  border:2px solid rgba(253,164,175,.3);
+}
+.card h2{font-family:'Playfair Display',serif;font-size:clamp(1.2rem,5vw,2rem);color:#881337;margin-bottom:10px;line-height:1.3}
+.card p{color:#9f1239;font-size:clamp(.88rem,3.5vw,1rem);margin-bottom:24px;opacity:.8;line-height:1.6}
+.big-emoji{font-size:clamp(2.5rem,10vw,3.5rem);margin-bottom:14px;animation:bounceEmoji 1.5s ease infinite;display:block}
+@keyframes bounceEmoji{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+
+/* ── BUTTONS ── */
+.btn-primary{
+  background:linear-gradient(135deg,var(--rose),var(--lilac));color:white;border:none;
+  padding:clamp(12px,3vw,16px) clamp(28px,7vw,44px);border-radius:50px;
+  font-family:'Caveat',cursive;font-size:clamp(1.2rem,4.5vw,1.5rem);font-weight:700;
+  cursor:pointer;box-shadow:0 6px 20px rgba(244,63,94,.35);transition:all .2s ease;
+  display:inline-block;-webkit-tap-highlight-color:transparent;
+}
+.btn-primary:hover{transform:translateY(-2px) scale(1.04)}
+.btn-primary:active{transform:scale(.97)}
+.btn-secondary{
+  background:white;color:var(--rose);border:2px solid var(--blush);
+  padding:clamp(12px,3vw,14px) clamp(28px,7vw,40px);border-radius:50px;
+  font-family:'Caveat',cursive;font-size:clamp(1.2rem,4.5vw,1.5rem);font-weight:700;
+  cursor:pointer;transition:all .15s ease;-webkit-tap-highlight-color:transparent;
+}
+.btn-row{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+.btn-gold{
+  background:linear-gradient(135deg,var(--gold),#f97316);color:white;border:none;
+  padding:clamp(12px,3vw,16px) clamp(28px,7vw,44px);border-radius:50px;
+  font-family:'Caveat',cursive;font-size:clamp(1.2rem,4.5vw,1.5rem);font-weight:700;
+  cursor:pointer;box-shadow:0 8px 24px rgba(245,158,11,.4);transition:all .2s ease;
+  animation:goldPulse 2s ease-in-out infinite;-webkit-tap-highlight-color:transparent;
+}
+@keyframes goldPulse{0%,100%{box-shadow:0 8px 24px rgba(245,158,11,.4)}50%{box-shadow:0 8px 36px rgba(245,158,11,.6)}}
+@keyframes btnPulse{0%,100%{box-shadow:0 8px 24px rgba(244,63,94,.4),0 0 0 4px rgba(244,63,94,.1)}50%{box-shadow:0 8px 24px rgba(244,63,94,.4),0 0 0 12px rgba(244,63,94,.05)}}
+
+/* PAGE 1 — GIFT */
+#page-gift{background:linear-gradient(135deg,#fff0f3,#fce7f3,#fdf4ff);z-index:10}
+.sparkles-ring{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+.sparkle{position:absolute;font-size:1.2rem;animation:sparklePop 2s ease-in-out infinite}
+@keyframes sparklePop{0%,100%{transform:scale(0) rotate(0deg);opacity:0}50%{transform:scale(1.3) rotate(180deg);opacity:1}}
+.gift-wrapper{position:relative;z-index:2;text-align:center;display:flex;flex-direction:column;align-items:center;gap:clamp(14px,4vw,24px);max-width:480px;width:100%}
+.gift-title{font-family:'Caveat',cursive;font-size:clamp(1.1rem,4.5vw,2rem);color:var(--rose);animation:titleWiggle 3s ease-in-out infinite;text-shadow:0 2px 12px rgba(244,63,94,.3);line-height:1.3}
+@keyframes titleWiggle{0%,100%{transform:rotate(-1deg)}50%{transform:rotate(1deg)}}
+.gift-box{cursor:pointer;transition:transform .2s ease;filter:drop-shadow(0 12px 30px rgba(244,63,94,.3));animation:giftShake .8s ease-in-out infinite;transform-origin:bottom center}
+@keyframes giftShake{0%,100%{transform:rotate(0deg)}20%{transform:rotate(-3deg)}40%{transform:rotate(3deg)}60%{transform:rotate(-2deg)}80%{transform:rotate(2deg)}}
+.gift-box:active{transform:scale(.95);animation:none}
+.gift-svg{width:clamp(140px,38vw,240px)}
+.subtitle-tag{font-family:'Caveat',cursive;color:#be185d;font-size:clamp(.85rem,3.5vw,1.1rem);background:rgba(253,164,175,.3);padding:5px 16px;border-radius:30px;border:1.5px dashed var(--blush)}
+.open-btn{background:linear-gradient(135deg,var(--rose),var(--lilac));color:white;border:none;padding:clamp(12px,3vw,16px) clamp(32px,8vw,44px);border-radius:50px;font-family:'Caveat',cursive;font-size:clamp(1.3rem,5vw,1.6rem);font-weight:700;cursor:pointer;letter-spacing:1px;animation:btnPulse 2s ease-in-out infinite;transition:all .2s ease}
+
+/* PAGE 2 — READY */
+#page-ready{background:linear-gradient(160deg,#fff0f3,#fdf4ff,#eff6ff);z-index:9}
+#page-ready .card{max-width:480px;overflow:hidden;min-height:220px}
+
+/* PAGE 3 — QUESTIONS */
+#page-questions{background:linear-gradient(150deg,#fff0f3,#fce7f3,#fdf4ff);z-index:8}
+.q-card{max-width:500px;overflow:hidden;min-height:240px}
+.q-progress{display:flex;gap:8px;justify-content:center;margin-bottom:20px}
+.q-dot{width:10px;height:10px;border-radius:50%;background:var(--blush);transition:background .3s}
+.q-dot.active{background:var(--rose);transform:scale(1.3)}
+.q-dot.done{background:var(--mint)}
+.q-text{font-family:'Playfair Display',serif;font-size:clamp(1.15rem,4.5vw,1.8rem);color:#881337;margin-bottom:24px;line-height:1.4}
+.q-btn-row{display:flex;gap:12px;justify-content:center;position:relative;min-height:56px;align-items:center}
+.q-no-btn{background:white;color:#9ca3af;border:2px solid #e5e7eb;padding:clamp(10px,2.5vw,14px) clamp(24px,6vw,40px);border-radius:50px;font-family:'Caveat',cursive;font-size:clamp(1.1rem,4vw,1.5rem);font-weight:700;cursor:pointer;position:absolute;white-space:nowrap;transition:transform .12s ease}
+
+/* PAGE 4 — BRIDGE */
+#page-bridge{background:linear-gradient(160deg,#fff0f3,#fdf4ff,#f0fdf4);z-index:7}
+
+/* PAGE 5 — MESSAGE */
+#page-message{background:linear-gradient(160deg,#fff0f3,#fce7f3);z-index:6}
+.message-wrapper{max-width:680px;width:100%;margin:0 auto;position:relative;z-index:2}
+.letter-paper{background:white;border-radius:20px;padding:clamp(20px,5vw,52px) clamp(18px,5vw,52px);box-shadow:0 20px 60px rgba(244,63,94,.12);border:2px solid rgba(253,164,175,.2);position:relative}
+.letter-header{text-align:center;margin-bottom:22px}
+.anna-label{font-family:'Caveat',cursive;font-size:clamp(.85rem,3vw,1rem);color:var(--pink);background:var(--cream);padding:4px 14px;border-radius:20px;display:inline-block;margin-bottom:8px}
+.letter-header h2{font-family:'Playfair Display',serif;font-size:clamp(1.4rem,5vw,2.4rem);color:#881337;line-height:1.3}
+.letter-header h2 em{font-style:italic;color:var(--rose)}
+.letter-body{font-family:'Caveat',cursive;font-size:clamp(1rem,3.5vw,1.25rem);color:#4c0519;line-height:1.9;white-space:pre-wrap}
+.huggy-section{margin-top:28px;text-align:center;padding:clamp(18px,4vw,28px);background:linear-gradient(135deg,rgba(253,164,175,.15),rgba(232,121,249,.1));border-radius:18px;border:2px dashed rgba(244,63,94,.2)}
+.huggy-btn{background:linear-gradient(135deg,var(--rose),var(--lilac));color:white;border:none;padding:clamp(12px,3vw,16px) clamp(28px,7vw,44px);border-radius:50px;font-family:'Caveat',cursive;font-size:clamp(1.2rem,4.5vw,1.5rem);font-weight:700;cursor:pointer;box-shadow:0 8px 24px rgba(244,63,94,.4);animation:hugPulse 1.5s ease-in-out infinite}
+@keyframes hugPulse{0%,100%{transform:scale(1)}50%{transform:scale(1.04)}}
+
+/* PAGE 6 — HUG */
+#page-hug{background:linear-gradient(160deg,#fff0f3,#fdf4ff);z-index:5}
+.hug-scene{text-align:center}
+.hug-figures{font-size:clamp(3rem,12vw,6rem);display:flex;align-items:center;justify-content:center;margin:16px 0;gap:8px}
+.hug-left{animation:hugLeft 2s ease-in-out forwards}
+.hug-right{animation:hugRight 2s ease-in-out forwards}
+.hug-hearts{animation:heartsFloat .5s ease-in-out 1.5s forwards;opacity:0}
+@keyframes hugLeft{0%{transform:translateX(-60px)}100%{transform:translateX(0)}}
+@keyframes hugRight{0%{transform:translateX(60px)}100%{transform:translateX(0)}}
+@keyframes heartsFloat{0%{opacity:0;transform:translateY(0)}100%{opacity:1;transform:translateY(-20px)}}
+.hug-continue-btn{margin-top:24px;background:linear-gradient(135deg,var(--rose),var(--gold));color:white;border:none;padding:clamp(12px,3vw,14px) clamp(28px,7vw,40px);border-radius:50px;font-family:'Caveat',cursive;font-size:clamp(1.1rem,4.5vw,1.4rem);font-weight:700;cursor:pointer;opacity:0;animation:fadeInBtn .6s ease 2.8s forwards}
+@keyframes fadeInBtn{to{opacity:1}}
+
+/* PAGE 7 — VIDEO */
+#page-video{background:linear-gradient(160deg,#fff0f3,#fce7f3,#fdf4ff);z-index:4}
+.video-page-wrapper{max-width:700px;width:100%;margin:0 auto}
+.video-page-header{text-align:center;margin-bottom:clamp(16px,4vw,28px)}
+.video-page-header h1{font-family:'Playfair Display',serif;font-size:clamp(1.5rem,5.5vw,2.6rem);color:#881337}
+.video-page-header h1 em{color:var(--rose);font-style:italic}
+.video-section-card{background:white;border-radius:20px;padding:clamp(16px,4vw,28px);box-shadow:0 12px 40px rgba(244,63,94,.1);margin-bottom:clamp(16px,4vw,24px)}
+.section-label{font-family:'Caveat',cursive;font-size:clamp(.85rem,3vw,1rem);color:var(--rose);background:var(--cream);padding:4px 12px;border-radius:20px;display:inline-block;margin-bottom:12px}
+.video-frame{width:100%;aspect-ratio:16/9;border-radius:14px;overflow:hidden;background:#1a1a2e;display:flex;align-items:center;justify-content:center}
+.video-frame video{width:100%;height:100%;object-fit:cover;border-radius:14px}
+.video-footer{text-align:center;padding:clamp(18px,4vw,24px);background:white;border-radius:20px}
+.video-footer .sig{font-family:'Caveat',cursive;font-size:clamp(1rem,3.5vw,1.2rem);color:var(--rose)}
+
+/* PAGE 8 — ALBUM (fullscreen) */
+#page-album{background:#0d0006;z-index:3;padding:0;overflow:hidden}
+.album-slide{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .45s ease}
+.album-slide.active{opacity:1;pointer-events:all}
+.slide-img-wrap{flex:1;display:flex;align-items:center;justify-content:center;width:100%;padding:0}
+.slide-img-wrap img{max-width:100%;max-height:calc(100vh - 160px);object-fit:contain;border-radius:12px;box-shadow:0 8px 40px rgba(0,0,0,.6)}
+.slide-caption-bar{width:100%;padding:clamp(10px,2.5vw,14px) clamp(16px,4vw,28px);text-align:center;flex-shrink:0}
+.slide-caption{font-family:'Caveat',cursive;font-size:clamp(1rem,4vw,1.3rem);color:rgba(255,255,255,.92);text-shadow:0 1px 8px rgba(0,0,0,.5)}
+.slide-nav{display:flex;gap:clamp(10px,3vw,18px);padding:clamp(10px,2.5vw,14px) clamp(16px,4vw,24px);flex-shrink:0}
+.slide-btn{padding:clamp(10px,2.5vw,13px) clamp(22px,6vw,34px);border-radius:50px;font-family:'Caveat',cursive;font-size:clamp(1.05rem,4vw,1.3rem);font-weight:700;cursor:pointer;border:none}
+.slide-btn-back{background:rgba(255,255,255,.1);color:white;border:1.5px solid rgba(255,255,255,.2)}
+.slide-btn-next{background:linear-gradient(135deg,var(--rose),var(--lilac));color:white}
+.album-header-bar{position:absolute;top:0;left:0;right:0;padding:clamp(10px,2.5vw,14px) clamp(16px,4vw,24px) 0;display:flex;justify-content:space-between;z-index:5}
+.album-title{font-family:'Caveat',cursive;font-size:clamp(.95rem,4vw,1.2rem);color:rgba(255,255,255,.6)}
+.slide-dots{display:flex;gap:5px;align-items:center}
+.sdot{width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,.25);transition:all .25s}
+.sdot.active{background:var(--rose);transform:scale(1.5)}
+.sdot.done{background:rgba(255,255,255,.5)}
+.swipe-hint{position:absolute;bottom:20px;left:50%;transform:translateX(-50%);font-size:.7rem;color:rgba(255,255,255,.2);display:none}
+@media(pointer:coarse){.swipe-hint{display:block}}
+
+/* BIRTHDAY POPUP */
+.bday-popup-overlay{position:fixed;inset:0;z-index:5000;background:rgba(5,0,10,.85);display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .4s ease;padding:16px}
+.bday-popup-overlay.open{opacity:1;pointer-events:all}
+.bday-popup{background:linear-gradient(145deg,#fff0f3,#fdf4ff,#fce7f3);border-radius:28px;padding:clamp(28px,7vw,52px) clamp(24px,7vw,52px);text-align:center;max-width:min(480px,90vw);width:100%;box-shadow:0 24px 80px rgba(244,63,94,.35);animation:popupIn .6s cubic-bezier(.34,1.56,.64,1) forwards;transform:scale(0)}
+@keyframes popupIn{to{transform:scale(1)}}
+.popup-big-emoji{font-size:clamp(3.5rem,14vw,5.5rem);animation:popEmoji 1s ease infinite;display:block}
+@keyframes popEmoji{0%,100%{transform:scale(1) rotate(-3deg)}50%{transform:scale(1.15) rotate(3deg)}}
+.popup-title{font-family:'Playfair Display',serif;font-size:clamp(1.5rem,6vw,2.6rem);color:#881337}
+.popup-title em{font-style:italic;color:var(--rose)}
+.popup-close-btn{background:linear-gradient(135deg,var(--rose),var(--lilac));color:white;border:none;padding:clamp(12px,3vw,15px) clamp(30px,8vw,48px);border-radius:50px;font-family:'Caveat',cursive;font-size:clamp(1.2rem,5vw,1.5rem);font-weight:700;cursor:pointer;margin-top:12px}
+</style>
+</head>
+<body>
+
+<div class="hearts-bg" id="heartsBg"></div>
+<div class="confetti-container" id="confettiContainer"></div>
+<div class="transition-overlay" id="transitionOverlay"></div>
+<canvas id="popupConfettiCanvas" style="position:fixed;inset:0;pointer-events:none;z-index:4999"></canvas>
+
+<!-- PAGE 1: GIFT -->
+<div class="page active" id="page-gift">
+  <div class="sparkles-ring" id="sparklesRing"></div>
+  <div class="gift-wrapper">
+    <div class="subtitle-tag">✨ Someone special has something for you ✨</div>
+    <div class="gift-box" onclick="openGift()">
+      <svg class="gift-svg" viewBox="0 0 260 280" fill="none">
+        <rect x="20" y="130" width="220" height="140" rx="12" fill="url(#boxG)"/>
+        <rect x="10" y="100" width="240" height="45" rx="10" fill="url(#lidG)"/>
+        <rect x="115" y="100" width="30" height="170" fill="#be185d" opacity=".55"/>
+        <rect x="10" y="115" width="240" height="15" fill="#be185d" opacity=".45"/>
+        <ellipse cx="105" cy="98" rx="38" ry="22" fill="#f43f5e" transform="rotate(-20 105 98)"/>
+        <ellipse cx="155" cy="98" rx="38" ry="22" fill="#f43f5e" transform="rotate(20 155 98)"/>
+        <circle cx="130" cy="100" r="16" fill="#be185d"/><circle cx="130" cy="100" r="10" fill="#f43f5e"/>
+        <defs><linearGradient id="boxG" x1="20" y1="130" x2="240" y2="270"><stop offset="0%" stop-color="#fda4af"/><stop offset="100%" stop-color="#f43f5e" stop-opacity=".4"/></linearGradient><linearGradient id="lidG" x1="10" y1="100" x2="250" y2="145"><stop offset="0%" stop-color="#fb7185"/><stop offset="100%" stop-color="#e11d48"/></linearGradient></defs>
+      </svg>
+    </div>
+    <h1 class="gift-title">🎀 A little something just for you, kutty ma! 🎀</h1>
+    <button class="open-btn" onclick="openGift()">🎁 Open Me!</button>
+  </div>
+</div>
+
+<!-- PAGE 2: READY -->
+<div class="page" id="page-ready">
+  <div class="card"><span class="big-emoji">🤔</span><h2>I have some questions...</h2><p>Are you ready to answer them honestly? 👀<br>No running away, okay?</p><div class="btn-row"><button class="btn-primary" onclick="goToQuestions()">Yes! 🙋‍♀️</button><button class="btn-secondary" onmouseenter="runNoBtn(this)" ontouchstart="runNoBtn(this)">No 🙈</button></div></div>
+</div>
+
+<!-- PAGE 3: QUESTIONS -->
+<div class="page" id="page-questions">
+  <div class="card q-card"><div class="q-progress"><div class="q-dot active" id="dot-0"></div><div class="q-dot" id="dot-1"></div><div class="q-dot" id="dot-2"></div></div><span class="big-emoji" id="qEmoji">🥺</span><div class="q-text" id="qText">Do you like your anna?</div><div class="q-btn-row"><button class="btn-primary" onclick="nextQuestion()">Yes! 💕</button><button class="q-no-btn" id="qNoBtn" onmouseenter="runQNoBtn()" ontouchstart="runQNoBtn()">No 😤</button></div></div>
+</div>
+
+<!-- PAGE 4: BRIDGE -->
+<div class="page" id="page-bridge"><div class="card"><span class="big-emoji">😏</span><h2>Ok ok, enough...<br>I got my answers! 😄</h2><p>Now click here to see anna's wish to her kutty ma 💌</p><button class="btn-gold" onclick="goToMessage()">🌸 See Anna's Wish 🌸</button></div></div>
+
+<!-- PAGE 5: MESSAGE -->
+<div class="page scrollable" id="page-message">
+  <div class="message-wrapper"><div class="letter-paper"><div class="letter-header"><div class="anna-label">💌 A letter from Anna</div><h2>To my dearest<br><em>Kutty Ma</em> 🌸</h2></div><div class="letter-body">Hey kutty ma,<br><br>Happy Birthday, my little sunshine! 🌞 Every memory with you is a treasure I hold close to my heart. You make my world brighter just by being in it. I hope this year brings you endless smiles, sweet surprises, and all the love you deserve. Never forget how special you are to me. 💕<br><br>Anna loves you to the moon and back. 🌙<br><br>Happy Birthday, my dearest kutty ma! 🎂✨</div><div class="huggy-section"><p>💝 And to finish this off properly...<br>Anna needs a huggy from her kutty ma!</p><button class="huggy-btn" onclick="goToHug()">🤗 Give Huggy!</button></div></div></div>
+</div>
+
+<!-- PAGE 6: HUG -->
+<div class="page" id="page-hug"><div class="hug-scene"><h2>Yaaaay! 🎉</h2><p>Huggy received! 💌</p><div class="hug-figures"><span class="hug-left">🧑</span><span class="hug-hearts">💕</span><span class="hug-right">👧</span></div><p class="hug-sub">Anna loves you SO much! 🥰</p><button class="hug-continue-btn" onclick="goToVideo()">✨ A Video From Anna ✨</button></div></div>
+
+<!-- PAGE 7: VIDEO -->
+<div class="page scrollable" id="page-video">
+  <div class="video-page-wrapper"><div class="video-page-header"><h1>Anna's <em>Video Message</em> 🎬</h1><p>Pressed record just for you, kutty ma 💌</p></div><div class="video-section-card"><div class="section-label">🎬 Watch This!</div><h3>A little something from the heart 💕</h3><div class="video-frame"><video controls style="width:100%;height:100%"><source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">Your browser doesn't support video.</video></div></div><div class="video-footer"><p>Now for the best part... 📸</p><div class="sig">Our memories together 🌸</div><button class="btn-primary" style="margin-top:18px" onclick="goToAlbum()">📸 See Our Photo Album 📸</button></div></div>
+</div>
+
+<!-- PAGE 8: PHOTO ALBUM -->
+<div class="page" id="page-album"><div class="album-header-bar"><div class="album-title">📸 Our Memories</div><div class="slide-dots" id="slideDots"></div></div><div class="swipe-hint">← swipe to navigate →</div><div id="slidesContainer"></div></div>
+
+<!-- BIRTHDAY POPUP -->
+<div class="bday-popup-overlay" id="bdayPopupOverlay"><div class="bday-popup"><span class="popup-big-emoji">🎂</span><div class="popup-title">Happy Birthday<br><em>Thangachi!</em> 🎀</div><div class="popup-subtitle">You are the most precious little sister<br>in the whole universe. Anna loves you<br>SO SO SO much! 🥹💕</div><button class="popup-close-btn" onclick="closeBdayPopup()">💖 Thank you Anna! 💖</button></div></div>
+
+<script>
+// Helper: hearts, sparkles, confetti
+const hb=document.getElementById('heartsBg');
+['💕','🌸','✨','💖','🎀','💗','🌺','⭐'].forEach(c=>{ for(let j=0;j<2;j++){ const h=document.createElement('div');h.className='heart-float';h.textContent=c;h.style.left=Math.random()*100+'vw';h.style.top=Math.random()*100+'vh';h.style.animationDuration=(8+Math.random()*12)+'s';h.style.animationDelay=(-Math.random()*12)+'s';h.style.fontSize=(0.8+Math.random()*1.2)+'rem';hb.appendChild(h);}});
+const sr=document.getElementById('sparklesRing');['✦','★','✨','✿','❋','✸'].forEach(c=>{ for(let j=0;j<2;j++){ const s=document.createElement('div');s.className='sparkle';s.textContent=c;s.style.left=(5+Math.random()*90)+'%';s.style.top=(5+Math.random()*90)+'%';s.style.animationDelay=(Math.random()*2)+'s';s.style.animationDuration=(1.5+Math.random())+'s';s.style.color=['#f43f5e','#fb7185','#f59e0b','#e879f9','#34d399'][Math.floor(Math.random()*5)];sr.appendChild(s);}});
+function fireConfetti(n=80){ const colors=['#f43f5e','#fb7185','#f59e0b','#e879f9','#34d399','#60a5fa','#fda4af','#fcd34d']; const ct=document.getElementById('confettiContainer'); for(let i=0;i<n;i++) setTimeout(()=>{ const p=document.createElement('div');p.className='confetti-piece';p.style.left=Math.random()*100+'vw';p.style.background=colors[Math.floor(Math.random()*colors.length)];p.style.width=(6+Math.random()*10)+'px';p.style.height=(8+Math.random()*14)+'px';p.style.borderRadius=Math.random()>.5?'50%':'2px';p.style.animationDuration=(1.5+Math.random()*2.5)+'s';p.style.animationDelay=(Math.random()*.5)+'s';ct.appendChild(p);setTimeout(()=>p.remove(),4000);},i*25);}
+function flashTransition(cb){ const ov=document.getElementById('transitionOverlay'); ov.classList.add('flash'); setTimeout(()=>{ov.classList.remove('flash');cb&&cb();},350);}
+function goToPage(id){ 
+  flashTransition(()=>{ 
+    document.querySelectorAll('.page').forEach(p=>p.classList.remove('active')); 
+    const targetPage = document.getElementById(id);
+    if(targetPage) {
+      targetPage.classList.add('active');
+      if(targetPage.classList.contains('scrollable')) targetPage.scrollTop = 0;
+    }
+  }); 
+}
+function openGift(){ fireConfetti(); goToPage('page-ready'); }
+function goToQuestions(){ questionIndex=0; renderQuestion(); goToPage('page-questions'); }
+function goToMessage(){ goToPage('page-message'); }
+function goToHug(){ fireConfetti(); goToPage('page-hug'); }
+function goToVideo(){ goToPage('page-video'); }
+function goToAlbum(){ currentSlide=0; bdayPopupShown=false; renderSlide(); goToPage('page-album'); }
+function endExperience(){ 
+  fireConfetti(150);
+  launchPopupConfetti();
+  document.getElementById('bdayPopupOverlay').classList.add('open');
+}
+
+// questions
+const questions=[{text:'Do you like your anna? 🥺',emoji:'🥺'},{text:'Do you like your anna more? 💕',emoji:'😍'},{text:'Do you like your anna more and more? 🥰',emoji:'🥰'}];
+let questionIndex=0;
+function renderQuestion(){ document.getElementById('qText').textContent=questions[questionIndex].text; document.getElementById('qEmoji').textContent=questions[questionIndex].emoji; for(let i=0;i<3;i++) document.getElementById('dot-'+i).className='q-dot'+(i<questionIndex?' done':i===questionIndex?' active':''); const nb=document.getElementById('qNoBtn'); nb.style.transform='translate(0,0)';nb.style.position='absolute';nb.style.right='0';nb.style.top='0';nb.style.left='auto';}
+function nextQuestion(){ fireConfetti(50); questionIndex++; if(questionIndex>=questions.length) setTimeout(()=>goToPage('page-bridge'),400); else renderQuestion(); }
+function runNoBtn(btn){ const card=btn.closest('.card'),rect=card.getBoundingClientRect(); let x,y; do{x=10+Math.random()*(rect.width-110);y=10+Math.random()*(rect.height-60);}while(Math.abs(x-parseFloat(btn.style.left||0))<60&&Math.abs(y-parseFloat(btn.style.top||0))<40); btn.style.position='absolute';btn.style.left=x+'px';btn.style.top=y+'px'; }
+function runQNoBtn(){ const nb=document.getElementById('qNoBtn'),card=nb.closest('.q-card'); const W=card.offsetWidth-56,H=card.offsetHeight-56; nb.style.position='absolute'; nb.style.transform=`translate(${-W/2+Math.random()*(W-80)}px,${-H/2+Math.random()*(H-40)}px)`; }
+
+// ALBUM SLIDES (add your actual image paths here)
+const SLIDES = [
+  { src: "", caption: "Our first memory together 💕" }, 
+  { src: "", caption: "Smiles like sunshine 🌸" }, 
+  { src: "", caption: "Laughing nonstop ✨" }, 
+  { src: "", caption: "Treasured moments 💖" }, 
+  { src: "", caption: "Sweetest bond 🎀" }, 
+  { src: "", caption: "You and me 💗" }, 
+  { src: "", caption: "Endless joy 🌺" }, 
+  { src: "", caption: "Sparkle in your eyes ⭐" }, 
+  { src: "", caption: "Anna's pride 🥰" }, 
+  { src: "", caption: "Always together 🌟" }, 
+  { src: "", caption: "Little sister magic 💫" }, 
+  { src: "", caption: "Unforgettable days 🎊" }, 
+  { src: "", caption: "Heart full of love 💝" }, 
+  { src: "", caption: "Butterfly hugs 🦋" }, 
+  { src: "", caption: "Rainbow of memories 🌈" },
+  { src: "", caption: "Our favourite photo ever... 🥹💕" }
+];
+let currentSlide=0, bdayPopupShown=false;
+function buildAlbum(){ const container=document.getElementById('slidesContainer'), dotsEl=document.getElementById('slideDots'); container.innerHTML=''; dotsEl.innerHTML=''; SLIDES.forEach((sl,idx)=>{ const div=document.createElement('div'); div.className='album-slide'+(idx===SLIDES.length-1?' surprise-slide':''); div.id='slide-'+idx; const imgWrap=document.createElement('div'); imgWrap.className='slide-img-wrap'; if(sl.src){ const img=document.createElement('img'); img.src=sl.src; img.alt='Memory'; img.draggable=false; img.onerror=()=>{ imgWrap.innerHTML=`<div class="slide-placeholder"><span>📷</span><span>Photo ${idx+1}</span><small style="opacity:.5">Add src</small></div>`; }; imgWrap.appendChild(img); } else { imgWrap.innerHTML=`<div class="slide-placeholder"><span>📷</span><span>Photo ${idx+1}</span><small style="opacity:.5">Add image URL</small></div>`; } const capBar=document.createElement('div'); capBar.className='slide-caption-bar'; capBar.innerHTML=`<div class="slide-caption">${sl.caption}</div><div class="slide-counter">${idx===SLIDES.length-1?'🎁 The End!':(idx+1)+' / '+(SLIDES.length-1)}</div>`; const nav=document.createElement('div'); nav.className='slide-nav'; if(idx!==SLIDES.length-1){ nav.innerHTML=`<button class="slide-btn slide-btn-back" onclick="slideNav(-1)">← Back</button><button class="slide-btn slide-btn-next" onclick="slideNav(1)">Next →</button>`; }else{ nav.innerHTML=`<button class="slide-btn slide-btn-back" onclick="slideNav(-1)">← Back</button><button class="slide-btn slide-btn-next" onclick="endExperience()">🎉 Finish! 🎉</button>`; } div.appendChild(imgWrap); div.appendChild(capBar); div.appendChild(nav); container.appendChild(div); const dot=document.createElement('div'); dot.className='sdot'; dot.id='sdot-'+idx; dotsEl.appendChild(dot); }); }
+function renderSlide(){ SLIDES.forEach((_,idx)=>{ const slide=document.getElementById('slide-'+idx); const dot=document.getElementById('sdot-'+idx); if(slide) slide.classList.toggle('active', idx===currentSlide); if(dot){ dot.className='sdot'+(idx<currentSlide?' done':idx===currentSlide?' active':''); } }); }
+function slideNav(dir){ const next=currentSlide+dir; if(next<0||next>=SLIDES.length) return; currentSlide=next; renderSlide(); }
+// popup confetti
+let popConfettiAnim=null, popParticles=[];
+function launchPopupConfetti(){ const canvas=document.getElementById('popupConfettiCanvas'); const ctx=canvas.getContext('2d'); canvas.width=window.innerWidth; canvas.height=window.innerHeight; const colors=['#f43f5e','#fb7185','#f59e0b','#e879f9','#34d399','#fda4af','#ffffff']; popParticles=[]; for(let i=0;i<200;i++){ popParticles.push({ x:Math.random()*canvas.width, y:-20-Math.random()*canvas.height*0.3, vx:(Math.random()-0.5)*4, vy:2+Math.random()*5, r:4+Math.random()*8, color:colors[Math.floor(Math.random()*colors.length)], rot:Math.random()*360, vrot:(Math.random()-0.5)*8, shape:Math.random()>.5?'rect':'circle', alpha:1 }); } function draw(){ ctx.clearRect(0,0,canvas.width,canvas.height); let alive=false; popParticles.forEach(p=>{ p.x+=p.vx; p.y+=p.vy; p.rot+=p.vrot; p.vy+=0.07; if(p.y<canvas.height+30) alive=true; else p.alpha=Math.max(0,p.alpha-0.02); ctx.save(); ctx.globalAlpha=p.alpha; ctx.translate(p.x,p.y); ctx.rotate(p.rot*Math.PI/180); ctx.fillStyle=p.color; if(p.shape==='rect') ctx.fillRect(-p.r/2,-p.r/2,p.r,p.r*1.4); else{ ctx.beginPath(); ctx.arc(0,0,p.r/2,0,Math.PI*2); ctx.fill(); } ctx.restore(); }); if(alive) popConfettiAnim=requestAnimationFrame(draw); else ctx.clearRect(0,0,canvas.width,canvas.height); } popConfettiAnim=requestAnimationFrame(draw); }
+function stopPopupConfetti(){ if(popConfettiAnim){ cancelAnimationFrame(popConfettiAnim); popConfettiAnim=null; } const canvas=document.getElementById('popupConfettiCanvas'); canvas.getContext('2d').clearRect(0,0,canvas.width,canvas.height); }
+function closeBdayPopup(){ document.getElementById('bdayPopupOverlay').classList.remove('open'); stopPopupConfetti(); }
+// swipe & keyboard
+(()=>{ let tx=null; const pg=document.getElementById('page-album'); pg.addEventListener('touchstart',e=>{tx=e.touches[0].clientX;},{passive:true}); pg.addEventListener('touchend',e=>{ if(tx!==null){ const dx=e.changedTouches[0].clientX-tx; if(Math.abs(dx)>40) slideNav(dx<0?1:-1); } tx=null; },{passive:true}); })();
+document.addEventListener('keydown',e=>{ if(document.getElementById('page-album').classList.contains('active')){ if(e.key==='ArrowRight') slideNav(1); else if(e.key==='ArrowLeft') slideNav(-1); } if(e.key==='Escape'&&document.getElementById('bdayPopupOverlay').classList.contains('open')) closeBdayPopup(); });
+// init album
+buildAlbum();
+renderSlide();
+</script>
+</body>
+</html>
